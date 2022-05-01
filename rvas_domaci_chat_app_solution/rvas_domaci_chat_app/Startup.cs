@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using poruke_namespace;
 using rvas_domaci_chat_app.Data;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,8 @@ namespace rvas_domaci_chat_app
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +55,7 @@ namespace rvas_domaci_chat_app
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+                
             app.UseRouting();
 
             app.UseAuthentication();
@@ -64,6 +67,9 @@ namespace rvas_domaci_chat_app
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+            });
+            app.UseSignalR(config =>{
+                config.MapHub<MessageHub>("/messages");
             });
         }
     }
