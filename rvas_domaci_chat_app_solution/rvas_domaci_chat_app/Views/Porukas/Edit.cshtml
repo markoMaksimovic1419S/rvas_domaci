@@ -1,0 +1,44 @@
+﻿@model rvas_domaci_chat_app.Models.Poruka
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Poruka</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="poruku_poslao" class="control-label"></label>
+                <input asp-for="poruku_poslao" class="form-control" />
+                <span asp-validation-for="poruku_poslao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="text_poruke" class="control-label"></label>
+                <input asp-for="text_poruke" class="form-control" />
+                <span asp-validation-for="text_poruke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="id_sobe" class="control-label"></label>
+                <input asp-for="id_sobe" class="form-control" />
+                <span asp-validation-for="id_sobe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

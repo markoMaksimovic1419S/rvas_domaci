@@ -1,0 +1,39 @@
+﻿@model IEnumerable<rvas_domaci_chat_app.Models.ChatSoba>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Napravi novu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv sobe
+            </th>
+            <th>
+                Sobu kreirao
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.naziv_sobe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mail_kretora)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.id">Udji u chat sobu</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

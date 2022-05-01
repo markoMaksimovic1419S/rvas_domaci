@@ -1,0 +1,28 @@
+﻿@model rvas_domaci_chat_app.Models.ChatSoba
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Kreiranje chat sobe</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="naziv_sobe" class="control-label">Naziv sobe</label>
+                <input asp-for="naziv_sobe" class="form-control" />
+                <span asp-validation-for="naziv_sobe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kreiraj sobu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

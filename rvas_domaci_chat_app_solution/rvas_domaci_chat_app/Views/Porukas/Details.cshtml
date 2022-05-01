@@ -1,0 +1,36 @@
+﻿@model rvas_domaci_chat_app.Models.Poruka
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Poruka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.poruku_poslao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.poruku_poslao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.text_poruke)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.text_poruke)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_sobe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_sobe)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

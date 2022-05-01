@@ -1,0 +1,53 @@
+﻿@model rvas_domaci_chat_app.Models.ChatSoba
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Dobrodosli u chat sobu: @Html.DisplayFor(model => model.naziv_sobe)</h1>
+<h3>Ovu sobu je kreirao: @Html.DisplayFor(model => model.mail_kretora)</h3>
+
+<div>
+    <hr />
+    <br />
+    <ul style="width: 600px; height:  200px; overflow-y: auto; border: 1px solid black;" id="lista_poruka">
+        @foreach (var item in ViewBag.Message)
+        {
+            <li><b>@item.poruku_poslao</b><br />@item.text_poruke</li>
+        }
+    </ul>
+    <br />
+
+    <form id="slanje_forma">
+        <input type="text" name="nova_poruka" placeholder="Vasa poruka" id="poruka_za_slanje" />
+        <input type="submit" name="posalji" value="Posalji poruku" />
+        <input type="hidden" name="id_sobe" id="id_sobe" value="@Html.DisplayFor(model => model.id)" />
+    </form>
+</div>
+<div>
+</div>
+<script src="~/js/jquery.js"></script>
+<script>
+    $(document).on('submit', "#slanje_forma", function (e) {
+        e.preventDefault();
+
+        var url = "/Porukas/PorukaSlanje";
+        var formData = new FormData();
+        formData.append("poruka_text", $("#poruka_za_slanje").val());
+        formData.append("id_sobe", $("#id_sobe").val());
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            console.log(response);
+            var dodavanje = " <li><b>" + response.poslao + "</b><br />" + response.poruka + "</li>";
+            $("#lista_poruka").prepend(dodavanje);
+            $("#poruka_text").val("");
+        });
+    })
+
+</script>
