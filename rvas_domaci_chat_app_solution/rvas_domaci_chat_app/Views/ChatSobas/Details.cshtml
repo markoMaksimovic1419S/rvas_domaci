@@ -42,7 +42,11 @@
         $("#lista_poruka").prepend(dodavanje);
         $("#poruka_text").val("");
     });
-    konekcija.start().catch(function (err) {
+    konekcija.start().then(res => {
+        konekcija.invoke("SendMessageToAll", "konektovanje_u_sobu", $("#id_sobe").val()).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }).catch(function (err) {
         return console.error(err.toString());
     });
     
@@ -53,6 +57,7 @@
         konekcija.invoke("SendMessageToAll", poruka, id_sobe).catch(function (err) {
             return console.error(err.toString());
         });
+        $("#poruka_za_slanje").val("");
     })
 
 </script>

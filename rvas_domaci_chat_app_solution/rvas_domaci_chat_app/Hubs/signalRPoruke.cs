@@ -14,8 +14,12 @@ namespace poruke_namespace
         [Authorize]
         public Task SendMessageToAll(string message, string id_sobe)
         {
-            Groups.AddToGroupAsync(Context.ConnectionId, id_sobe.ToString());
             string user = Context.User.Identity.Name;
+            if ( message == "konektovanje_u_sobu")
+            {
+                Groups.AddToGroupAsync(Context.ConnectionId, id_sobe.ToString());
+                return Clients.Group(id_sobe.ToString()).SendAsync("ReceiveMessage", "Korisnik je konektovan", user.ToString());
+            }
             Poruka nova_poruka = new Poruka();
             nova_poruka.poruku_poslao = user .ToString();
             nova_poruka.id_sobe = int.Parse(id_sobe);
